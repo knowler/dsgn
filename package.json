@@ -7,6 +7,7 @@
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^8.6.4",
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^0.28.11",
     "glhd-tailwindcss-transitions": "^0.3.0",
     "glob-all": "^3.1.0",

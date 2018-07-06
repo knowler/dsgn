@@ -2,6 +2,7 @@ const path = require('path');
 const glob = require('glob-all');
 const { argv } = require('yargs');
 
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PurgecssWebpackPlugin = require("purgecss-webpack-plugin");
@@ -35,6 +36,7 @@ let webpackConfig = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin('public', { verbose: false }),
     new MiniCssExtractPlugin({
       filename: 'styles/[name].css'
     }),
