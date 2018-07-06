@@ -23,7 +23,7 @@ let webpackConfig = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: `scripts/[name]${isProduction ? '_[hash]' : null}.js`
+    filename: `scripts/[name]${isProduction ? '_[hash]' : ''}.js`
   },
   module: {
     rules: [
@@ -41,7 +41,7 @@ let webpackConfig = {
   plugins: [
     new CleanWebpackPlugin('public', { verbose: false }),
     new MiniCssExtractPlugin({
-      filename: `styles/[name]${isProduction ? '_[hash]' : null}.css`
+      filename: `styles/[name]${isProduction ? '_[hash]' : ''}.css`
     }),
     new HtmlWebpackPlugin({
       template: './index.html'
