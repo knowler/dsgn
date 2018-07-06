@@ -5,13 +5,15 @@ const { argv } = require('yargs');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const PurgecssWebpackPlugin = require("purgecss-webpack-plugin");
+const PurgecssWebpackPlugin = require('purgecss-webpack-plugin');
+const BrowserSyncWebpackPlugin = require('browser-sync-webpack-plugin');
 
 const isProduction = !!(argv.env && argv.env.production);
 
 let webpackConfig = {
   mode: isProduction ? 'production' : 'development',
   context: path.resolve(__dirname, 'resources'),
+  stats: isProduction ? true : false,
   entry: {
     'main': [
       './scripts/main.js',
@@ -66,6 +68,16 @@ if (isProduction) {
       ]
     })
   );
+} else {
+  webpackConfig.plugins.push(
+    new BrowserSyncWebpackPlugin(
+      {
+        server: path.resolve(__dirname, 'public'),
+        injectChanges: true,
+        plugins: [ 'bs-html-injector' ]
+      }
+    )
+  )
 }
 
 module.exports = webpackConfig;
