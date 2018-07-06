@@ -1,6 +1,6 @@
 module.exports = {
   plugins: {
-    tailwindcss: true,
+    tailwindcss: './resources/styles/tailwind.js',
     autoprefixer: true
   }
 };
