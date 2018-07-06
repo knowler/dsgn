@@ -1,0 +1,17 @@
+{
+  "name": "dsgn",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:knowler/dsgn.git",
+  "author": "Nathan Knowler <nathan@knowler.me>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-serve": "^1.0.4"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-serve"
+  }
+}
