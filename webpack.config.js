@@ -20,7 +20,7 @@ let webpackConfig = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'scripts/[name].js'
+    filename: `scripts/[name]${isProduction ? '_[hash]' : null}.js`
   },
   module: {
     rules: [
@@ -38,7 +38,7 @@ let webpackConfig = {
   plugins: [
     new CleanWebpackPlugin('public', { verbose: false }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].css'
+      filename: `styles/[name]${isProduction ? '_[hash]' : null}.css`
     }),
     new HtmlWebpackPlugin({
       template: './index.html'
