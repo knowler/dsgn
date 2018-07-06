@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PurgecssWebpackPlugin = require('purgecss-webpack-plugin');
 const BrowserSyncWebpackPlugin = require('browser-sync-webpack-plugin');
+const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 
 const isProduction = !!(argv.env && argv.env.production);
 
@@ -66,7 +67,8 @@ if (isProduction) {
           extensions: ["html", "js", "php", "vue"]
         }
       ]
-    })
+    }),
+    new UglifyJsWebpackPlugin()
   );
 } else {
   webpackConfig.plugins.push(
