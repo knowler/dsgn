@@ -1,5 +1,7 @@
 const path = require('path');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
   mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
   context: path.resolve(__dirname, 'resources'),
@@ -11,5 +13,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'scripts/main.js'
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin()
+  ]
 };
