@@ -1,10 +1,15 @@
 const path = require('path');
+const glob = require('glob-all');
+const { argv } = require('yargs');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PurgecssWebpackPlugin = require("purgecss-webpack-plugin");
 
-module.exports = {
-  mode: process.env.WEBPACK_SERVE ? 'development' : 'production',
+const isProduction = !!(argv.env && argv.env.production);
+
+let webpackConfig = {
+  mode: isProduction ? 'production' : 'development',
   context: path.resolve(__dirname, 'resources'),
   entry: {
     'main': [
@@ -38,3 +43,27 @@ module.exports = {
     })
   ]
 };
+
+class TailwindExtractor {
+  static extract(content) {
+    return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
+  }
+}
+
+if (isProduction) {
+  webpackConfig.plugins.push(
+    new PurgecssWebpackPlugin({
+      paths: glob.sync([
+        path.join(__dirname, 'resources/**/*.html')
+      ]),
+      extractors: [
+        {
+          extractor: TailwindExtractor,
+          extensions: ["html", "js", "php", "vue"]
+        }
+      ]
+    })
+  );
+}
+
+module.exports = webpackConfig;
