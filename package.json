@@ -13,6 +13,6 @@
   },
   "scripts": {
     "build": "webpack",
-    "start": "webpack-serve"
+    "start": "webpack-serve --watch --open --content public"
   }
 }
