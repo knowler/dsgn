@@ -1,6 +1,6 @@
 {
   "name": "dsgn",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "main": "index.js",
   "repository": "git@github.com:knowler/dsgn.git",
   "author": "Nathan Knowler <nathan@knowler.me>",
@@ -15,6 +15,7 @@
     "cssnano": "^4.0.0",
     "glhd-tailwindcss-transitions": "^0.3.0",
     "glob-all": "^3.1.0",
+    "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.1",
@@ -22,6 +23,7 @@
     "postcss-loader": "^2.1.5",
     "purgecss-webpack-plugin": "^1.2.0",
     "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "tailwindcss": "^0.6.1",
     "tailwindcss-alpha": "^0.1.2",
     "tailwindcss-flexbox-order": "^1.0.0",
@@ -30,10 +32,11 @@
     "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.15.1",
     "webpack-cli": "^3.0.8",
+    "webpack-serve": "^2.0.2",
     "yargs": "^12.0.1"
   },
   "scripts": {
     "build": "webpack --progress --env.production",
-    "start": "webpack --progress --watch"
+    "start": "webpack-serve --no-clipboard"
   }
 }

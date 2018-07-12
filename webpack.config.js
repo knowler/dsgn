@@ -23,14 +23,15 @@ let webpackConfig = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: `scripts/[name]${isProduction ? '_[hash]' : ''}.js`
+    filename: `scripts/[name]${isProduction ? '_[hash]' : ''}.js`,
+    chunkFilename: `scripts/[id]${isProduction ? '_[hash]' : ''}.js`,
   },
   module: {
     rules: [
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -41,7 +42,8 @@ let webpackConfig = {
   plugins: [
     new CleanWebpackPlugin('public', { verbose: false }),
     new MiniCssExtractPlugin({
-      filename: `styles/[name]${isProduction ? '_[hash]' : ''}.css`
+      filename: `styles/[name]${isProduction ? '_[hash]' : ''}.css`,
+      chunkFilename: `styles/[id]${isProduction ? '_[hash]' : ''}.css`
     }),
     new HtmlWebpackPlugin({
       template: './index.html'
@@ -74,9 +76,9 @@ if (isProduction) {
   webpackConfig.plugins.push(
     new BrowserSyncWebpackPlugin(
       {
-        server: path.resolve(__dirname, 'public'),
-        injectChanges: true,
-        plugins: [ 'bs-html-injector' ]
+        proxy: 'http://localhost:8080',
+        plugins: ['bs-html-injector'],
+        files: ['public/**/*.html']
       }
     )
   )
